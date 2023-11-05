@@ -19,8 +19,6 @@ const AdminAddStud = () => {
             (Response)=>{
                if (inputField.password==inputField.confirmpass) {
                   if (inputField.studPhoneNo.length==10) {
-                    let userid=Response.data._id
-                    sessionStorage.setItem("userid",userid)
                     alert("Student Added Successfully !!")
                     setInputField({studName:"",studAdmNo:"",studDob:"",studBG:"",studAddress:"",studPhoneNo:"",username:"",password:"",confirmpass:""})
                   } else {

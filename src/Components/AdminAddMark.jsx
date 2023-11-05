@@ -1,13 +1,27 @@
 import axios from 'axios'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import AdminNavbar from './AdminNavbar'
 
 const AdminAddMark = () => {
     const [inputField,setInputField]=useState(
-        {studId:sessionStorage.getItem("userid"),examName:"",examSubOne:"",examMarkOne:"",examSubTwo:"",examMarkTwo:"",examSubThree:"",examMarkThree:"",examSubFour:"",examMarkFour:""}
+        {studId:"",examName:"",examSubOne:"",examMarkOne:"",examSubTwo:"",examMarkTwo:"",examSubThree:"",examMarkThree:"",examSubFour:"",examMarkFour:""}
+    )
+
+    const [studData,setStudData]=useState(
+        []
     )
 
     const apiLink="http://localhost:3001/admaddmark"
+    const apiLink2="http://localhost:3001/viewstudprofile"
+
+    const getData=(id)=>{
+        let data={"_id":id}
+        axios.post(apiLink2,data).then(
+            (Response)=>{
+                setStudData(Response.data)
+            }
+        )
+    }
 
     const inputHandler=(event)=>{
         setInputField({...inputField,[event.target.name]:event.target.value})
@@ -26,6 +40,7 @@ const AdminAddMark = () => {
         )
     }
 
+    useEffect(()=>{getData()},[])
   return (
     <div>
         <AdminNavbar/>
@@ -36,6 +51,17 @@ const AdminAddMark = () => {
                         <div className="col col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12"></div>
                         <div className="col col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
                             <h1>Add Mark</h1>
+                        </div>
+                        <div className="col col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4 col-xxl-4">
+                            <label htmlFor="" className="form-label">Student ID</label>
+                            <select onChange={inputHandler} name="studId" id="" className="form-control" value={inputField.studId}>
+                                <option value="SELECT">SELECT</option>
+                                {studData.map(
+                                    (value,index)=>{
+                                        return <option value={value._id}>{value._id}</option>
+                                    }
+                                )}
+                            </select>
                         </div>
                         <div className="col col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4 col-xxl-4">
                             <label htmlFor="" className="form-label">Exam Name</label>
@@ -69,7 +95,7 @@ const AdminAddMark = () => {
                             <label htmlFor="" className="form-label">Subject 4</label>
                             <input onChange={inputHandler} type="text" className="form-control" name="examSubFour" value={inputField.examSubFour} />
                         </div>
-                        <div className="col col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4 col-xxl-4">
+                        <div className="col col-12 col-sm-6 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
                             <label htmlFor="" className="form-label">Marks</label>
                             <input onChange={inputHandler} type="text" className="form-control" name="examMarkFour" value={inputField.examMarkFour} />
                         </div>
