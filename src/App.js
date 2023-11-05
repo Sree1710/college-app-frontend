@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import AdminLogin from './Components/AdminLogin';
 import AdminAddMark from './Components/AdminAddMark';
 import StudLogin from './Components/StudLogin';
+import StudProfile from './Components/StudProfile';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path='/adminaddstud' exact element={<AdminAddStud/>}/>
         <Route path='/adminaddmark' exact element={<AdminAddMark/>}/>
         <Route path='/studlogin' exact element={<StudLogin/>}/>
+        <Route path='/studprofile' exact element={<StudProfile/>}/>
       </Routes>
       </BrowserRouter>
     </div>
