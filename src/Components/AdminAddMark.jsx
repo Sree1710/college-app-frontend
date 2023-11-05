@@ -4,7 +4,7 @@ import AdminNavbar from './AdminNavbar'
 
 const AdminAddMark = () => {
     const [inputField,setInputField]=useState(
-        {_id:sessionStorage.getItem("userid"),examName:"",examSubOne:"",examMarkOne:"",examSubTwo:"",examMarkTwo:"",examSubThree:"",examMarkThree:"",examSubFour:"",examMarkFour:""}
+        {studId:sessionStorage.getItem("userid"),examName:"",examSubOne:"",examMarkOne:"",examSubTwo:"",examMarkTwo:"",examSubThree:"",examMarkThree:"",examSubFour:"",examMarkFour:""}
     )
 
     const apiLink="http://localhost:3001/admaddmark"
@@ -74,7 +74,7 @@ const AdminAddMark = () => {
                             <input onChange={inputHandler} type="text" className="form-control" name="examMarkFour" value={inputField.examMarkFour} />
                         </div>
                         <div className="col col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
-                            <button onClick={readValue} className="btn-btn-warning">Add</button>
+                            <button onClick={readValue} className="btn btn-warning">Add</button>
                         </div>
                     </div>
                 </div>
