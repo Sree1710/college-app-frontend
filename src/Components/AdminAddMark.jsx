@@ -12,11 +12,10 @@ const AdminAddMark = () => {
     )
 
     const apiLink="http://localhost:3001/admaddmark"
-    const apiLink2="http://localhost:3001/viewstudprofile"
+    const apiLink2="http://localhost:3001/admviewstudprofile"
 
-    const getData=(id)=>{
-        let data={"_id":id}
-        axios.post(apiLink2,data).then(
+    const getData=()=>{
+        axios.post(apiLink2).then(
             (Response)=>{
                 setStudData(Response.data)
             }
@@ -28,7 +27,8 @@ const AdminAddMark = () => {
     }
 
     const readValue=()=>{
-        axios.post(apiLink,inputField).then(
+        let token = {"token":sessionStorage.getItem("token")}
+        axios.post(apiLink,inputField,token).then(
             (Response)=>{
                 if (Response.data.status=="success") {
                     alert("Marks Added Successfully !!")
@@ -56,11 +56,11 @@ const AdminAddMark = () => {
                             <label htmlFor="" className="form-label">Student ID</label>
                             <select onChange={inputHandler} name="studId" id="" className="form-control" value={inputField.studId}>
                                 <option value="SELECT">SELECT</option>
-                                {studData.map(
+                                 {studData.map(
                                     (value,index)=>{
-                                        return <option value={value._id}>{value._id}</option>
+                                        return <option value={value.studName}>{value.studName}</option>
                                     }
-                                )}
+                                 )}
                             </select>
                         </div>
                         <div className="col col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4 col-xxl-4">

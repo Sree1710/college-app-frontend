@@ -11,7 +11,8 @@ const StudViewMark = () => {
 
     const getData=()=>{
        let data={"studId":sessionStorage.getItem("userid")}
-       axios.post(apiLink,data).then(
+       let token ={"token": sessionStorage.getItem("token")}
+       axios.post(apiLink,data,token).then(
         (Response)=>{
            setStudData(Response.data)
         }

@@ -20,7 +20,9 @@ const StudLogin = () => {
             (Response)=>{
                 if (Response.data.status=="success") {
                     let userid=Response.data.data._id
+                    let token=Response.data.token
                     sessionStorage.setItem("userid",userid)
+                    sessionStorage.setItem("token",token)
                     navigate("/studprofile")
                 } else {
                     alert("Invalid Username or Password !!!")

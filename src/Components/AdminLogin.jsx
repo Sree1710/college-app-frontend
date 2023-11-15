@@ -1,11 +1,14 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import NavBar2 from './NavBar2'
+import axios from 'axios'
 
 const AdminLogin = () => {
     const [inputField,setInputField]=useState(
         {username:"",password:""}
     )
+
+    const apiLink="http://localhost:3001/adminlogin"
 
     const navigate=useNavigate()
 
@@ -14,11 +17,17 @@ const AdminLogin = () => {
     }
 
     const readValue=()=>{
-        if (inputField.username=="admin" && inputField.password=="admin") {
-            navigate("/adminaddstud")
-        } else {
-            alert("Invalid Username and Password !!")
-        }
+        axios.post(apiLink,inputField).then(
+            (Response)=>{
+                if (Response.data.status=="success") {
+                    let token=Response.data.token
+                    sessionStorage.getItem("token",token)
+                    navigate("/adminaddstud")
+                } else {
+                    alert(Response.data.status)
+                }
+            }
+        )
     }
 
   return (

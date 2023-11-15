@@ -15,7 +15,8 @@ const AdminAddStud = () => {
     }
 
     const readValue=()=>{
-        axios.post(apiLink,inputField).then(
+        let token={"token":sessionStorage.getItem("token")}
+        axios.post(apiLink,inputField,token).then(
             (Response)=>{
                if (inputField.password==inputField.confirmpass) {
                   if (inputField.studPhoneNo.length==10) {
