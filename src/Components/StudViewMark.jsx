@@ -10,11 +10,12 @@ const StudViewMark = () => {
     const apiLink="http://localhost:3001/viewstudmark"
 
     const getData=()=>{
-       let data={"studId":sessionStorage.getItem("userid")}
-       let token ={"token": sessionStorage.getItem("token")}
-       axios.post(apiLink,data,token).then(
+       let data={"stud_id":sessionStorage.getItem("studname"),"token": sessionStorage.getItem("studtoken")}
+       console.log(data)
+       axios.post(apiLink,data).then(
         (Response)=>{
            setStudData(Response.data)
+           console.log(Response.data)
         }
        )
     }
@@ -51,7 +52,7 @@ const StudViewMark = () => {
                                         {studData.map(
                                             (value,index) => {
                                                 return <tr>
-                                                    <th scope="row">{value.studId}</th>
+                                                    <th scope="row">{value.stud_id}</th>
                                                     <td>{value.examName}</td>
                                                     <td>{value.examSubOne}</td>
                                                     <td>{value.examMarkOne}</td>

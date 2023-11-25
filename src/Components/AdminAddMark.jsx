@@ -4,7 +4,7 @@ import AdminNavbar from './AdminNavbar'
 
 const AdminAddMark = () => {
     const [inputField,setInputField]=useState(
-        {studId:"",examName:"",examSubOne:"",examMarkOne:"",examSubTwo:"",examMarkTwo:"",examSubThree:"",examMarkThree:"",examSubFour:"",examMarkFour:""}
+        {token:sessionStorage.getItem("token"),stud_id:"",examName:"",examSubOne:"",examMarkOne:"",examSubTwo:"",examMarkTwo:"",examSubThree:"",examMarkThree:"",examSubFour:"",examMarkFour:""}
     )
 
     const [studData,setStudData]=useState(
@@ -27,12 +27,13 @@ const AdminAddMark = () => {
     }
 
     const readValue=()=>{
-        let token = {"token":sessionStorage.getItem("token")}
-        axios.post(apiLink,inputField,token).then(
+        console.log(inputField)
+        axios.post(apiLink,inputField).then(
             (Response)=>{
+                console.log(Response.data)
                 if (Response.data.status=="success") {
                     alert("Marks Added Successfully !!")
-                    setInputField({examName:"",examSubOne:"",examMarkOne:"",examSubTwo:"",examMarkTwo:"",examSubThree:"",examMarkThree:"",examSubFour:"",examMarkFour:""})
+                    setInputField({stud_id:"",examName:"",examSubOne:"",examMarkOne:"",examSubTwo:"",examMarkTwo:"",examSubThree:"",examMarkThree:"",examSubFour:"",examMarkFour:""})
                 } else {
                     alert("Something Went Wrong !!")
                 }
@@ -53,12 +54,12 @@ const AdminAddMark = () => {
                             <h1>Add Mark</h1>
                         </div>
                         <div className="col col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4 col-xxl-4">
-                            <label htmlFor="" className="form-label">Student ID</label>
-                            <select onChange={inputHandler} name="studId" id="" className="form-control" value={inputField.studId}>
+                            <label htmlFor="" className="form-label">Student Name</label>
+                            <select onChange={inputHandler} name="stud_id" value={inputField.stud_id} className="form-control">
                                 <option value="SELECT">SELECT</option>
                                  {studData.map(
                                     (value,index)=>{
-                                        return <option value={value.studName}>{value.studName}</option>
+                                        return <option value={value._id}>{value.studName}</option>
                                     }
                                  )}
                             </select>

@@ -10,11 +10,12 @@ const StudProfile = () => {
     const apiLink = "http://localhost:3001/viewstudprofile"
 
     const getData = () => {
-        let data = { "_id": sessionStorage.getItem("userid") }
-        let token = {"token": sessionStorage.getItem("token")}
-        axios.post(apiLink, data, token).then(
+        let data = {"_id": sessionStorage.getItem("studname"),"token": sessionStorage.getItem("studtoken")}
+        console.log(data)
+        axios.post(apiLink, data).then(
             (Response) => {
                 setStudData(Response.data)
+                console.log(Response.data)
             }
         )
     }

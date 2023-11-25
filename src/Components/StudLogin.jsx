@@ -19,10 +19,10 @@ const StudLogin = () => {
         axios.post(apiLink,inputField).then(
             (Response)=>{
                 if (Response.data.status=="success") {
-                    let userid=Response.data.data._id
+                    let studname=Response.data.data._id
                     let token=Response.data.token
-                    sessionStorage.setItem("userid",userid)
-                    sessionStorage.setItem("token",token)
+                    sessionStorage.setItem("studname",studname)
+                    sessionStorage.setItem("studtoken",token)
                     navigate("/studprofile")
                 } else {
                     alert("Invalid Username or Password !!!")

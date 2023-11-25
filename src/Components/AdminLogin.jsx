@@ -21,7 +21,7 @@ const AdminLogin = () => {
             (Response)=>{
                 if (Response.data.status=="success") {
                     let token=Response.data.token
-                    sessionStorage.getItem("token",token)
+                    sessionStorage.setItem("token",token)
                     navigate("/adminaddstud")
                 } else {
                     alert(Response.data.status)
